@@ -97,9 +97,11 @@ public class CenterFragment extends Fragment implements Centerinterface,XListVie
         handle =new Handler();
         //上拉加载，下拉刷新
         mXlistview.setPullLoadEnable(true);
+
+
         mXlistview.setPullRefreshEnable(true);
         //
         mXlistview.setXListViewListener(this);
-    
+
       }
 }
