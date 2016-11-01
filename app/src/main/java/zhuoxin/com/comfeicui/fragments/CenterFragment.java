@@ -101,5 +101,5 @@ public class CenterFragment extends Fragment implements Centerinterface,XListVie
         //
         mXlistview.setXListViewListener(this);
 
-    }
+      }
 }
