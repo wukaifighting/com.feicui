@@ -100,6 +100,6 @@ public class CenterFragment extends Fragment implements Centerinterface,XListVie
         mXlistview.setPullRefreshEnable(true);
         //
         mXlistview.setXListViewListener(this);
-
+    
       }
 }
