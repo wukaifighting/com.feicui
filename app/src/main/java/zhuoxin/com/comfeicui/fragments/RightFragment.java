@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import zhuoxin.com.comfeicui.Activity.MainActivity;
 import zhuoxin.com.comfeicui.R;
 
 /**
@@ -48,9 +49,10 @@ switch (v.getId()){
 
     case R.id.txt_right_dl:
          DengluFragment dengluFragment=new DengluFragment();
-        FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction=getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.center,dengluFragment);
         fragmentTransaction.commit();
+        MainActivity.close();
 
 }
     }

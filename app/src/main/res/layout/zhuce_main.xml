@@ -11,16 +11,19 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/edt_email"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:hint="请输入邮箱地址" />
 
         <EditText
+            android:id="@+id/edt_name"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:hint="请输入昵称" />
 
         <EditText
+            android:id="@+id/edt_password"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:hint="密码：6到16位字符" />
@@ -29,6 +32,7 @@
             android:layout_height="40dp"
             android:background="@drawable/longbutton_normal"
             android:text="立即注册"
+            android:id="@+id/btn_zc"
             />
     </LinearLayout>
 <LinearLayout

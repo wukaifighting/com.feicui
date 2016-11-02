@@ -43,7 +43,7 @@
 
     <LinearLayout
         android:id="@+id/center"
-        android:name="zhuoxin.com.comfeicui.fragments.CenterFragment"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

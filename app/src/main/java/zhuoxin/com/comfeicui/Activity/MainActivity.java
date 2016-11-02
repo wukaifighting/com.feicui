@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     ListView mlst_left;
     Button mBtn_left;
     Button mBtn_right;
-
+    public static  DrawerLayout drawerLayout;
     public static final String PATH = "http://118.244.212.82:9092/newsClient/news_list?ver=1&subid=1&dir=1&nid=1&stamp=20140321&cnt=20";
 
     @Override
@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mBtn_left = (Button) findViewById(R.id.img_left);
         mBtn_right = (Button) findViewById(R.id.img_share);
-        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+
+    drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mBtn_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
         initadapter();
     }
 
+    @Override
+    public void onContentChanged() {
+        super.onContentChanged();
+
+
+    }
+
     private void initview() {
         mlst_left = (ListView) findViewById(R.id.lst_left);
 
@@ -60,7 +68,13 @@ public class MainActivity extends AppCompatActivity {
         LeftfragmentAdapter leftadapter = new LeftfragmentAdapter(this);
         mlst_left.setAdapter(leftadapter);
 
+
     }
+    public static void close(){
+        drawerLayout.closeDrawer(Gravity.LEFT);
+        drawerLayout.closeDrawer(Gravity.RIGHT);
+    }
+
 
 
 }

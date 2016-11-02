@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import zhuoxin.com.comfeicui.Activity.MainActivity;
 import zhuoxin.com.comfeicui.R;
 
 /**
  * Created by Administrator on 2016/10/28.
  */
 
-public class LeftFragment extends Fragment{
+public class LeftFragment extends Fragment implements AdapterView.OnItemClickListener{
     ListView mlst;
     @Nullable
     @Override
@@ -28,20 +29,22 @@ public class LeftFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
        mlst= (ListView) view.findViewById(R.id.lst_left);
-       mlst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-               CenterFragment centerFragment=new CenterFragment();
-               FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
-               fragmentTransaction.replace(R.id.center,centerFragment);
-               fragmentTransaction.commit();
-           }
-       });
-
-    }
-
+mlst.setOnItemClickListener(this);
 
 
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
+            case 0:
+                CenterFragment centerFragment = new CenterFragment();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.center, centerFragment);
+                fragmentTransaction.commit();
+                MainActivity.close();
+                 break;
+        }
+    }}
 
