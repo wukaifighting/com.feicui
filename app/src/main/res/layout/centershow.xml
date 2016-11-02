@@ -4,6 +4,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/longbutton_pressed">
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:id="@+id/btn_centershow_left"
+            android:background="@drawable/back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zx"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            />
+        <Button
+            android:layout_width="10dp"
+            android:layout_height="40dp"
+            android:id="@+id/btn_centershow_right"/>
+    </LinearLayout>
+
     <WebView
         android:id="@+id/wbv_center"
         android:layout_width="match_parent"

@@ -8,7 +8,7 @@
     android:layout_height="40dp"
     android:orientation="horizontal"
     android:gravity="center"
-    android:background="@drawable/longbutton_pressed">
+    android:background="@drawable/btncolor">
     <Button
         android:layout_gravity="center"
         android:layout_width="40dp"
@@ -24,6 +24,7 @@
         android:gravity="center"
         android:layout_weight="1"
         android:layout_gravity="center"
+        android:id="@+id/txt_main_title"
         />
 
     <Button
@@ -40,7 +41,7 @@
     android:layout_height="match_parent"
     >
 
-    <fragment
+    <LinearLayout
         android:id="@+id/center"
         android:name="zhuoxin.com.comfeicui.fragments.CenterFragment"
         android:layout_width="match_parent"

@@ -10,25 +10,18 @@ import android.view.ViewGroup;
 import zhuoxin.com.comfeicui.R;
 
 /**
- * Created by Administrator on 2016/10/28.
+ * Created by Administrator on 2016/11/2.
  */
 
-public class LeftFragment extends Fragment {
-
+public class WjmmFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.left,container,false);
+        return inflater.inflate(R.layout.wjmm,container,false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-
-
     }
-
-
 }

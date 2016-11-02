@@ -1,5 +1,6 @@
 package zhuoxin.com.comfeicui.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,17 +26,19 @@ import zhuoxin.com.comfeicui.interfacea.Centerinterface;
  * Created by Administrator on 2016/11/1.
  */
 
-public class CenterActivity extends AppCompatActivity implements Centerinterface{
+public class CenterActivity extends AppCompatActivity implements Centerinterface ,DialogInterface.OnClickListener{
     ArrayList<Centerchild> list;
     WebView mWeb;
     int mposition;
     public static final String PATH = "http://118.244.212.82:9092/newsClient/news_list?ver=1&subid=1&dir=1&nid=1&stamp=20140321&cnt=20";
+    Button mBtn_left;
+    Button mBtn_right;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent=this.getIntent();
-        mposition= intent.getIntExtra("position",-1);
+        Intent intent = this.getIntent();
+        mposition = intent.getIntExtra("position", -1);
         setContentView(R.layout.centershow);
 
 
@@ -44,10 +48,12 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
     public void onContentChanged() {
         super.onContentChanged();
         mWeb = (WebView) findViewById(R.id.wbv_center);
+        mBtn_left= (Button) findViewById(R.id.btn_centershow_left);
+        mBtn_right= (Button) findViewById(R.id.btn_centershow_right);
         Centilutil centuil = new Centilutil();
         centuil.Centilutil(this);
         centuil.execute(PATH);
-
+//        mBtn_left.setOnClickListener();
 
     }
 
@@ -63,12 +69,13 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
 
     @Override
     public void centerface(String string) {
-        Gson gson=new Gson();
-        Type type=new TypeToken<Centerperson>(){}.getType();
-        Centerperson person=gson.fromJson(string,type);
-        ArrayList<Centerchild>   list= (ArrayList<Centerchild>) person.getData();
+        Gson gson = new Gson();
+        Type type = new TypeToken<Centerperson>() {
+        }.getType();
+        Centerperson person = gson.fromJson(string, type);
+        ArrayList<Centerchild> list = (ArrayList<Centerchild>) person.getData();
         //加载网页
-        mWeb.loadUrl(list.get(mposition-1).getLink());
+        mWeb.loadUrl(list.get(mposition - 1).getLink());
         //设置客户端的显示样式
         WebSettings mWebSettings = mWeb.getSettings();
         //js代码 自动识别是网页端手机端
@@ -96,5 +103,10 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
                                   }
                               }
         );
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+
     }
 }
