@@ -6,13 +6,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 import zhuoxin.com.comfeicui.R;
 import zhuoxin.com.comfeicui.com.adapter.LeftfragmentAdapter;
-import zhuoxin.com.comfeicui.fragments.CenterFragment;
 
 public class MainActivity extends AppCompatActivity {
     ListView mlst_left;
@@ -50,21 +48,6 @@ public class MainActivity extends AppCompatActivity {
         });
         initview();
         initadapter();
-        mlst_left.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        drawerLayout.closeDrawer(Gravity.LEFT);
-                        drawerLayout.closeDrawer(Gravity.RIGHT);
-                        CenterFragment centerFragment=new CenterFragment();
-//                        FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
-
-                        break;
-
-                }
-            }
-        });
     }
 
     private void initview() {
