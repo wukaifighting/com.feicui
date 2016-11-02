@@ -94,6 +94,8 @@ public class CenterAdapter extends BaseAdapter {
             holder.mTxt_1.setText(list.get(position).getSummary());
             //时间
             holder.mTxt_2.setText(list.get(position).getStamp());
+            //网址
+
         }
         return convertView;
     }

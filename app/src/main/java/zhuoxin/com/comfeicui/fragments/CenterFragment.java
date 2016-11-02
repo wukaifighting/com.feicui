@@ -1,6 +1,7 @@
 package zhuoxin.com.comfeicui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import me.maxwin.view.XListView;
+import zhuoxin.com.comfeicui.Activity.CenterActivity;
 import zhuoxin.com.comfeicui.Info.Centerchild;
 import zhuoxin.com.comfeicui.Info.Centerperson;
 import zhuoxin.com.comfeicui.R;
@@ -28,12 +31,13 @@ import zhuoxin.com.comfeicui.interfacea.Centerinterface;
  * Created by Administrator on 2016/11/1.
  */
 
-public class CenterFragment extends Fragment implements Centerinterface,XListView.IXListViewListener {
+public class CenterFragment extends Fragment implements Centerinterface,XListView.IXListViewListener,AdapterView.OnItemClickListener {
     XListView mXlistview;
     public static final String PATH = "http://118.244.212.82:9092/newsClient/news_list?ver=1&subid=1&dir=1&nid=1&stamp=20140321&cnt=20";
     ArrayList<Centerchild> list=new ArrayList<>();
     Context context;
     Handler handle;
+    int mPosition;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,6 +48,8 @@ public class CenterFragment extends Fragment implements Centerinterface,XListVie
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mXlistview= (XListView) view.findViewById(R.id.xlst);
+        //监听事件，不监听没反应
+        mXlistview.setXListViewListener(this);
         initData();
     }
 
@@ -80,6 +86,8 @@ public class CenterFragment extends Fragment implements Centerinterface,XListVie
                 stop();
             }
         },2000);
+//        mPosition++;
+//        new FileAsynctask ().execute(Contacts.PATH_XIAOZU_LV+mPosition);
     }
 
     @Override
@@ -93,15 +101,27 @@ public class CenterFragment extends Fragment implements Centerinterface,XListVie
         }
         CenterAdapter centeradapter=new CenterAdapter(list,getContext());
         mXlistview.setAdapter(centeradapter);
+        //监听
+       mXlistview.setOnItemClickListener(this);
         centeradapter.notifyDataSetChanged();
         handle =new Handler();
         //上拉加载，下拉刷新
         mXlistview.setPullLoadEnable(true);
-
-
         mXlistview.setPullRefreshEnable(true);
-        //
-        mXlistview.setXListViewListener(this);
 
-      }
+
+
+
+
 }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent= new Intent(getActivity(), CenterActivity.class);
+        intent.putExtra("position",position);
+        startActivity(intent);
+    }
+}
+
+
