@@ -13,7 +13,7 @@ import zhuoxin.com.comfeicui.R;
  * Created by Administrator on 2016/11/2.
  */
 
-public class WjmmFragment extends Fragment {
+public class ForgetFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

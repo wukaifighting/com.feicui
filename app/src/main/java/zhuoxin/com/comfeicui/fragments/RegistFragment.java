@@ -27,12 +27,12 @@ import zhuoxin.com.comfeicui.interfacea.HttpInterface;
  * Created by Administrator on 2016/11/2.
  */
 
-public class ZhuceFragment extends Fragment implements View.OnClickListener ,HttpInterface{ RequestQueue requestQueue;
+public class RegistFragment extends Fragment implements View.OnClickListener ,HttpInterface{ RequestQueue requestQueue;
     EditText mEdit_email;
     EditText mEdit_name;
     EditText mEdit_password;
     Button mBtn_zc;
-public static final String sPREFC_NAME="hello";
+public static final String sRegist="hello";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,14 +80,12 @@ public static final String sPREFC_NAME="hello";
             int result=data.getInt("result");
             String token=data.getString("token");
             String explian=data.getString("explain");
-
-            SharedPreferences shar=getActivity().getSharedPreferences(sPREFC_NAME, Context.MODE_PRIVATE);
-            SharedPreferences.Editor edit = shar.edit();
-            edit.putInt("result",result);
-            edit.putString("token",token);
-            edit.putString("explain",explian);
-            edit.commit();
-
+            SharedPreferences shar=getActivity().getSharedPreferences(sRegist, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor=shar.edit();
+            editor.putInt("result",result);
+            editor.putString("token",token);
+            editor.putString("explain",explian);
+            editor.commit();
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -23,7 +23,7 @@ import zhuoxin.com.comfeicui.interfacea.HttpInterface;
  * Created by Administrator on 2016/11/2.
  */
 
-public class DengluFragment extends Fragment implements View.OnClickListener,HttpInterface{
+public class LoginFragment extends Fragment implements View.OnClickListener,HttpInterface{
     Button mBtn_zc;
     Button mBtn_wjmm;
     Button mBtn_ddl;
@@ -54,13 +54,13 @@ public class DengluFragment extends Fragment implements View.OnClickListener,Htt
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_denglu_zhuce:
-                ZhuceFragment fragment=new ZhuceFragment();
+                RegistFragment fragment=new RegistFragment();
                 FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.center,fragment);
                 fragmentTransaction.commit();
                 break;
             case R.id.btn_denglu_wjmm:
-                WjmmFragment wjmmFragment=new WjmmFragment();
+                ForgetFragment wjmmFragment=new ForgetFragment();
                 FragmentTransaction fragmentT=getFragmentManager().beginTransaction();
                 fragmentT.replace(R.id.center,wjmmFragment);
                 fragmentT.commit();

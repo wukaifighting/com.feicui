@@ -48,7 +48,7 @@ public class RightFragment extends Fragment implements View.OnClickListener{
 switch (v.getId()){
 
     case R.id.txt_right_dl:
-         DengluFragment dengluFragment=new DengluFragment();
+         LoginFragment dengluFragment=new LoginFragment();
         FragmentTransaction fragmentTransaction=getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.center,dengluFragment);
         fragmentTransaction.commit();

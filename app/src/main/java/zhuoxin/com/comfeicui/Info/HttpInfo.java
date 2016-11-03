@@ -12,7 +12,7 @@ public class HttpInfo {
     //注册
     public static final  String REGISTER="path/user_register?";
     //接口文档
-    public static final String TOKEN="4895a86ff39b9d1124a102ecd3db138d";
+
     //登录
     public static final String START="path/user_login?";
     //
