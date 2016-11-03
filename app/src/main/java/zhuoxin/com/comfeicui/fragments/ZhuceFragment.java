@@ -1,8 +1,11 @@
 package zhuoxin.com.comfeicui.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +15,24 @@ import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import zhuoxin.com.comfeicui.Info.HttpInfo;
 import zhuoxin.com.comfeicui.R;
+import zhuoxin.com.comfeicui.Util.HttpUtil;
+import zhuoxin.com.comfeicui.interfacea.HttpInterface;
 
 /**
  * Created by Administrator on 2016/11/2.
  */
 
-public class ZhuceFragment extends Fragment implements View.OnClickListener
-//        ,HttpInterface
-{
-    RequestQueue requestQueue;
-  EditText mEdit_email;
-  EditText mEdit_name;
-  EditText mEdit_password;
+public class ZhuceFragment extends Fragment implements View.OnClickListener ,HttpInterface{ RequestQueue requestQueue;
+    EditText mEdit_email;
+    EditText mEdit_name;
+    EditText mEdit_password;
     Button mBtn_zc;
+public static final String sPREFC_NAME="hello";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,7 +43,7 @@ public class ZhuceFragment extends Fragment implements View.OnClickListener
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        requestQueue= Volley.newRequestQueue(getActivity());
+      requestQueue= Volley.newRequestQueue(getActivity());
         mEdit_email= (EditText) view.findViewById(R.id.edt_email);
         mEdit_name= (EditText) view.findViewById(R.id.edt_name);
         mEdit_password= (EditText) view.findViewById(R.id.edt_password);
@@ -55,13 +62,34 @@ public class ZhuceFragment extends Fragment implements View.OnClickListener
                      String name = mEdit_name.getText().toString();
                      String email = mEdit_email.getText().toString();
                      String password = mEdit_password.getText().toString();
-//                StringRequest request=new HttpUtil().getconnection( HttpInfo.BASE_URL+ HttpInfo.REGISTER+"ver=1&uid="+name+"&email="+email+"&pwd="+password",this,)
+                //吧地址写进来,调方法
+                 new HttpUtil().getconnection(HttpInfo.BASE_URL + HttpInfo.REGISTER + "ver=1&uid=" + name + "&email=" + email + "&pwd=" + password, this,requestQueue);
         }
 //        HttpInfo.BASE_URL+HttpInfo.REGISTER+"ver=1&uid="+name+"&email="+email+"&pwd="+password"
     }
 
-//    @Override
-//    public void getresponse(String message) {
 
-//    }
+    @Override
+    public void getresponse(String message) {
+        Log.e("hjbgjh","message"+message);
+        try {
+            JSONObject jsonObject=new JSONObject(message);
+            String message1=jsonObject.getString("message");
+            int status=jsonObject.getInt("status");
+            JSONObject data=jsonObject.getJSONObject("data");
+            int result=data.getInt("result");
+            String token=data.getString("token");
+            String explian=data.getString("explain");
+
+            SharedPreferences shar=getActivity().getSharedPreferences(sPREFC_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor edit = shar.edit();
+            edit.putInt("result",result);
+            edit.putString("token",token);
+            edit.putString("explain",explian);
+            edit.commit();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

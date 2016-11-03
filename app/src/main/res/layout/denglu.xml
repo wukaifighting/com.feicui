@@ -9,10 +9,12 @@
     android:orientation="vertical"
    android:gravity="center" >
     <EditText
+        android:id="@+id/edit_dl_name"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:hint="请输入用户昵称"/>
     <EditText
+        android:id="@+id/edt_dl_password"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:hint="密码：6到16位字符"/>
