@@ -55,11 +55,9 @@ public class ZhuceFragment extends Fragment implements View.OnClickListener
                      String name = mEdit_name.getText().toString();
                      String email = mEdit_email.getText().toString();
                      String password = mEdit_password.getText().toString();
-
-
-
+//                StringRequest request=new HttpUtil().getconnection( HttpInfo.BASE_URL+ HttpInfo.REGISTER+"ver=1&uid="+name+"&email="+email+"&pwd="+password",this,)
         }
-
+//        HttpInfo.BASE_URL+HttpInfo.REGISTER+"ver=1&uid="+name+"&email="+email+"&pwd="+password"
     }
 
 //    @Override

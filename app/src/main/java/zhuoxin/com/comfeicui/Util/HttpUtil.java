@@ -3,6 +3,7 @@ package zhuoxin.com.comfeicui.Util;
 import android.util.Log;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -14,7 +15,7 @@ import zhuoxin.com.comfeicui.interfacea.HttpInterface;
  */
 
 public class HttpUtil  {
-    public static void getconnection (String url, final HttpInterface listinterface){
+    public static void getconnection (String url, final HttpInterface listinterface,RequestQueue requestQueue){
         //
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
