@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import zhuoxin.com.comfeicui.Info.Centerchild;
 import zhuoxin.com.comfeicui.R;
 
@@ -79,7 +79,7 @@ public class CenterAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new Holder();
             convertView = LayoutInflater.from(context).inflate(R.layout.centerlistview, parent, false);
-            holder.mImg = (ImageView) convertView.findViewById(R.id.img_centerlst);
+            holder.mImg = (CircleImageView) convertView.findViewById(R.id.img_centerlst);
             holder.mTxt_0 = (TextView) convertView.findViewById(R.id.txt_centerlst0);
             holder.mTxt_1 = (TextView) convertView.findViewById(R.id.txt_centerlst1);
             holder.mTxt_2 = (TextView) convertView.findViewById(R.id.txt_centerlst2);
@@ -101,7 +101,7 @@ public class CenterAdapter extends BaseAdapter {
     }
 
     static class Holder {
-        ImageView mImg;
+        CircleImageView mImg;
         TextView mTxt_0;
         TextView mTxt_1;
         TextView mTxt_2;
