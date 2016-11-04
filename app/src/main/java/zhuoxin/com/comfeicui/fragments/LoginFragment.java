@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -59,18 +60,24 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Htt
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.center, fragment);
                 fragmentTransaction.commit();
+                Toast.makeText(getActivity(),"开始注册",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_denglu_wjmm:
                 ForgetFragment wjmmFragment = new ForgetFragment();
                 FragmentTransaction fragmentT = getFragmentManager().beginTransaction();
                 fragmentT.replace(R.id.center, wjmmFragment);
                 fragmentT.commit();
+                Toast.makeText(getActivity(),"请按提示输入",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_denglu_dl:
                 String name = mEdt_name.getText().toString();
                 String password = mEdit_password.getText().toString();
                 new HttpUtil().startconnection(HttpInfo.BASE_URL + HttpInfo.START, name, password, this, requestQueue);
-
+                SignFragment signFragment=new SignFragment();
+                FragmentTransaction sign=getFragmentManager().beginTransaction();
+                sign.replace(R.id.center,signFragment);
+                sign.commit();
+                Toast.makeText(getActivity(),"登录成功",Toast.LENGTH_SHORT).show();
 
         }
     }

@@ -1,6 +1,7 @@
 package zhuoxin.com.comfeicui.Activity;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,7 +36,7 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
     public static final String PATH = "http://118.244.212.82:9092/newsClient/news_list?ver=1&subid=1&dir=1&nid=1&stamp=20140321&cnt=20";
     Button mBtn_left;
     Button mBtn_right;
-
+    PopupWindow popupWindow;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,24 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
         centuil.execute(PATH);
         mBtn_left.setOnClickListener(this);
         mBtn_right.setOnClickListener(this);
+
+
+        //下拉菜单设置
+         popupWindow=new PopupWindow();
+         //设置VIEW
+     View view=  this.getLayoutInflater().inflate(R.layout.popupwindow,null,false);
+        popupWindow.setContentView(view);
+        //设置焦点
+        popupWindow.setFocusable(true);
+        //设置点击取消
+        popupWindow.setOutsideTouchable(true);
+        //设置背景，没有 背景取消不了
+//        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.mipmap.pupodingwndow));
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        //设置宽高
+        popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        //显示
 
     }
 
@@ -111,10 +132,11 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_centershow_left:
+
 
             case R.id.btn_centershow_right:
 
+               popupWindow.showAsDropDown(v);
         }
     }
 }
