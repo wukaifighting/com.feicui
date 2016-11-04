@@ -1,10 +1,10 @@
 package zhuoxin.com.comfeicui.Activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,7 +26,7 @@ import zhuoxin.com.comfeicui.interfacea.Centerinterface;
  * Created by Administrator on 2016/11/1.
  */
 
-public class CenterActivity extends AppCompatActivity implements Centerinterface ,DialogInterface.OnClickListener{
+public class CenterActivity extends AppCompatActivity implements Centerinterface ,View.OnClickListener{
     ArrayList<Centerchild> list;
     WebView mWeb;
     int mposition;
@@ -53,7 +53,8 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
         Centilutil centuil = new Centilutil();
         centuil.Centilutil(this);
         centuil.execute(PATH);
-//        mBtn_left.setOnClickListener();
+        mBtn_left.setOnClickListener(this);
+        mBtn_right.setOnClickListener(this);
 
     }
 
@@ -105,8 +106,15 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
         );
     }
 
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_centershow_left:
+
+            case R.id.btn_centershow_right:
+
+        }
     }
 }

@@ -17,20 +17,21 @@ import zhuoxin.com.comfeicui.R;
  * Created by Administrator on 2016/10/28.
  */
 
-public class LeftFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class LeftFragment extends Fragment implements AdapterView.OnItemClickListener {
     ListView mlst;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.left,container,false);
+        return inflater.inflate(R.layout.left, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       mlst= (ListView) view.findViewById(R.id.lst_left);
+        mlst = (ListView) view.findViewById(R.id.lst_left);
 
-mlst.setOnItemClickListener(this);
+        mlst.setOnItemClickListener(this);
 
 
     }
@@ -44,7 +45,14 @@ mlst.setOnItemClickListener(this);
                 fragmentTransaction.replace(R.id.center, centerFragment);
                 fragmentTransaction.commit();
                 MainActivity.close();
-                 break;
+                break;
+            case 1:
+                CollectFragment collectFragment = new CollectFragment();
+                FragmentTransaction collect = getActivity().getSupportFragmentManager().beginTransaction();
+                collect.replace(R.id.center, collectFragment);
+                collect.commit();
+                MainActivity.close();
         }
-    }}
+    }
+}
 

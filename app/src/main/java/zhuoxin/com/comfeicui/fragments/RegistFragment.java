@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -22,6 +23,8 @@ import zhuoxin.com.comfeicui.Info.HttpInfo;
 import zhuoxin.com.comfeicui.R;
 import zhuoxin.com.comfeicui.Util.HttpUtil;
 import zhuoxin.com.comfeicui.interfacea.HttpInterface;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 /**
  * Created by Administrator on 2016/11/2.
@@ -86,6 +89,7 @@ public static final String sRegist="hello";
             editor.putString("token",token);
             editor.putString("explain",explian);
             editor.commit();
+            Toast.makeText(getActivity(),"注册成功", LENGTH_SHORT).show();
         } catch (JSONException e) {
             e.printStackTrace();
         }
