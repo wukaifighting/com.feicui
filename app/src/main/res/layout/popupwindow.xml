@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_pupwindow"
         android:text="加入收藏"
-        android:layout_gravity="right"/>
+        android:layout_gravity="right"
+        />
 
 </LinearLayout>

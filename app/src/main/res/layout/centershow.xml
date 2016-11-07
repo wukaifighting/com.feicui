@@ -28,7 +28,9 @@
             android:layout_height="50dp"
             android:text="跟帖"
           android:layout_gravity="center"/>
-        <Button
+        <ImageView
+            android:layout_gravity="center"
+            android:background="@drawable/news_menu"
             android:layout_width="20dp"
             android:layout_height="40dp"
             android:id="@+id/btn_centershow_right"/>

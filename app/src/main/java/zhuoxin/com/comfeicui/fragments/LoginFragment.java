@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import zhuoxin.com.comfeicui.Info.HttpInfo;
 import zhuoxin.com.comfeicui.R;
 import zhuoxin.com.comfeicui.Util.HttpUtil;
@@ -31,7 +34,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Htt
     EditText mEdt_name;
     EditText mEdit_password;
     RequestQueue requestQueue;
-
+    int status=-1;
+    String explian;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,11 +77,21 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Htt
                 String name = mEdt_name.getText().toString();
                 String password = mEdit_password.getText().toString();
                 new HttpUtil().startconnection(HttpInfo.BASE_URL + HttpInfo.START, name, password, this, requestQueue);
-                SignFragment signFragment=new SignFragment();
-                FragmentTransaction sign=getFragmentManager().beginTransaction();
-                sign.replace(R.id.center,signFragment);
-                sign.commit();
-                Toast.makeText(getActivity(),"登录成功",Toast.LENGTH_SHORT).show();
+
+                switch (status){
+                    case -1:
+                        Toast.makeText(getActivity(),"请重新输入",Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case 0:
+                        SignFragment signFragment=new SignFragment();
+                        FragmentTransaction sign=getFragmentManager().beginTransaction();
+                        sign.replace(R.id.center,signFragment);
+                        sign.commit();
+                        Toast.makeText( getActivity(),explian,Toast.LENGTH_SHORT).show();
+                        break;
+                }
+
 
         }
     }
@@ -86,11 +100,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Htt
     public void getresponse(String message) {
 
         Log.e("messagr", "message" + message);
-//        try {
-//            JSONObject jsonObject=new JSONObject(message);
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+
+        try {
+            JSONObject jsonObject=new JSONObject(message);
+            String message1=jsonObject.getString("message");
+            status=jsonObject.getInt("status");
+            JSONObject data=jsonObject.getJSONObject("data");
+            int result=data.getInt("result");
+            String token=data.getString("token");
+               explian=data.getString("explain");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
