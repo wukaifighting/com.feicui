@@ -36,8 +36,6 @@ public class RightFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
         mTxt_right = (TextView) view.findViewById(R.id.txt_right_dl);
         mImg_weixin = (ImageView) view.findViewById(R.id.img_wexin);
         mImg_qq = (ImageView) view.findViewById(R.id.img_qq);
@@ -48,7 +46,6 @@ public class RightFragment extends Fragment implements View.OnClickListener {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.center, centerFragment);
         fragmentTransaction.commit();
-
         mTxt_right.setOnClickListener(this);
         mImg_weibo.setOnClickListener(this);
         mImg_freiends.setOnClickListener(this);

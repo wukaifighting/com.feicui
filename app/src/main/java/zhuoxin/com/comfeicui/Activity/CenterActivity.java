@@ -70,6 +70,7 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
          popupWindow=new PopupWindow();
          //设置VIEW
      View view=  this.getLayoutInflater().inflate(R.layout.popupwindow,null,false);
+
         popupWindow.setContentView(view);
 
        btn_pup = (Button) view.findViewById(R.id.btn_pupwindow);
@@ -78,7 +79,7 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
         //设置点击取消
         popupWindow.setOutsideTouchable(true);
         //设置背景，没有 背景取消不了
-//        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.mipmap.pupodingwndow));
+//      popupWindow.setBackgroundDrawable(getResources().getDrawable(R.mipmap.pupodingwndow));
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         //设置宽高
         popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
@@ -147,6 +148,8 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
 
                popupWindow.showAsDropDown(v);
             case R.id.btn_pupwindow:
+
+
                 Toast.makeText(this,"收藏成功，请在主页面查看",Toast.LENGTH_LONG).show();
         }
     }
