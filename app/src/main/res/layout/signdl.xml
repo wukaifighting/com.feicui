@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/img_signdl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/biz_pc_main_info_profile_avatar_bg_dark" />
 

@@ -1,10 +1,7 @@
 package zhuoxin.com.comfeicui.fragments;
 
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -77,31 +74,33 @@ public class SignFragment extends Fragment implements View.OnClickListener {
         if (resultCode == -1) {
             switch (requestCode) {
                 case 1: {
-                    Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
-                    mImg_sign.setImageBitmap(bitmap);
-
+//                    Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
+//                    mImg_sign.setImageBitmap(bitmap);
+                    cropfile(file);
                     break;
                 }
                 case 2: {
-                    //通过内容提供者获取系统数据
-                    ContentResolver contentresolver = getActivity().getContentResolver();
-                    //根据拿数据
-                    // 地址
-                    Uri uri = data.getData();
-                    String[] aray = {MediaStore.Images.Media.DATA};
-                    Cursor cursor = contentresolver.query(uri, aray, null, null, null);
-                    cursor.moveToFirst();
-                    String path = cursor.getString(cursor.getColumnIndex(aray[0]));
-                    //关闭游标
-                    cursor.close();
-                    //拿图pian
-                    Bitmap bitmap = BitmapFactory.decodeFile(path);
-                    mImg_sign.setImageBitmap(bitmap);
-
+//                    //通过内容提供者获取系统数据
+//                    ContentResolver contentresolver = getActivity().getContentResolver();
+//                    //根据拿数据
+//                    // 地址
+//                    Uri uri = data.getData();
+//                    String[] aray = {MediaStore.Images.Media.DATA};
+//                    Cursor cursor = contentresolver.query(uri, aray, null, null, null);
+//                    cursor.moveToFirst();
+//                    String path = cursor.getString(cursor.getColumnIndex(aray[0]));
+//                    //关闭游标
+//                    cursor.close();
+//                    //拿图pian
+//                    Bitmap bitmap = BitmapFactory.decodeFile(path);
+//                    mImg_sign.setImageBitmap(bitmap);
+                    crop(data.getData());
                     break;
                 }
                 case 3:
-
+                    Bitmap bitmap = data.getParcelableExtra("data");
+                    mImg_sign.setImageBitmap(bitmap);
+                    break;
 
 
             }
@@ -117,7 +116,33 @@ public class SignFragment extends Fragment implements View.OnClickListener {
         //设置剪切图片和类型
         intent.setDataAndType(uri, "image/*");
         //设置剪切意图
-        intent.setAction("com.android.action.CROP");
+        intent.setAction("com.android.camera.action.CROP");
+        //开启剪切
+        intent.putExtra("crop", "true");
+        //设置比例
+        intent.putExtra("asppectX", 1);
+        intent.putExtra("asppectY", 1);
+        //设置裁剪后输出的照片大小
+        intent.putExtra("outputX", 200);
+        intent.putExtra("outputY", 200);
+        //设置剪切圆形照片
+intent.putExtra("circleCrop","true");
+        //设置返回数据
+        intent.putExtra("return-data", true);
+        //启动
+        startActivityForResult(intent, 3);
+
+
+    }
+
+    //剪切照片图片
+    public void cropfile(File file) {
+        //使用意图剪切照片
+        Intent intent = new Intent();
+        //设置剪切图片和类型
+        intent.setDataAndType(Uri.fromFile(file), "image/*");
+        //设置剪切意图
+        intent.setAction("com.android.camera.action.CROP");
         //开启剪切
         intent.putExtra("crop", "true");
         //设置比例

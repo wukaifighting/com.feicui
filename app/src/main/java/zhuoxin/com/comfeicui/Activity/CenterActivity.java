@@ -147,10 +147,12 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
             case R.id.btn_centershow_right:
 
                popupWindow.showAsDropDown(v);
+                break;
             case R.id.btn_pupwindow:
 
 
                 Toast.makeText(this,"收藏成功，请在主页面查看",Toast.LENGTH_LONG).show();
+                break;
         }
     }
 }
