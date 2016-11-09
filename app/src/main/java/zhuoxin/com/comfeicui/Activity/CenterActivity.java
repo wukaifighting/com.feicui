@@ -69,11 +69,11 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
         //下拉菜单设置
          popupWindow=new PopupWindow();
          //设置VIEW
-     View view=  this.getLayoutInflater().inflate(R.layout.popupwindow,null,false);
+     View inflate=  this.getLayoutInflater().inflate(R.layout.popupwindow,null,false);
 
-        popupWindow.setContentView(view);
+        popupWindow.setContentView(inflate);
 
-       btn_pup = (Button) view.findViewById(R.id.btn_pupwindow);
+          btn_pup = (Button) inflate.findViewById(R.id.btn_pupwindow);
         //设置焦点
         popupWindow.setFocusable(true);
         //设置点击取消
@@ -149,7 +149,6 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
                popupWindow.showAsDropDown(v);
                 break;
             case R.id.btn_pupwindow:
-
 
                 Toast.makeText(this,"收藏成功，请在主页面查看",Toast.LENGTH_LONG).show();
                 break;

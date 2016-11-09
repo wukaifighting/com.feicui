@@ -126,7 +126,8 @@ public class SignFragment extends Fragment implements View.OnClickListener {
         intent.putExtra("outputX", 200);
         intent.putExtra("outputY", 200);
         //设置剪切圆形照片
-intent.putExtra("circleCrop","true");
+        intent.putExtra("circleCrop","true");
+        intent.putExtra("scale",true);
         //设置返回数据
         intent.putExtra("return-data", true);
         //启动
@@ -152,7 +153,8 @@ intent.putExtra("circleCrop","true");
         intent.putExtra("outputX", 200);
         intent.putExtra("outputY", 200);
         //设置剪切圆形照片
-
+        intent.putExtra("circleCrop","true");
+        intent.putExtra("scale",true);
         //设置返回数据
         intent.putExtra("return-data", true);
         //启动
@@ -180,9 +182,9 @@ intent.putExtra("circleCrop","true");
                 //调用系统相机
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //z照相,需要提供路径用于保存照
-                if (Environment.getExternalStorageDirectory().getPath().equals(Environment.MEDIA_MOUNTED)) {
-                    path = Environment.getExternalStorageDirectory().getPath();
-                }
+//                if (Environment.getExternalStorageDirectory().getPath().equals(Environment.MEDIA_MOUNTED)) {
+                 String   path = Environment.getExternalStorageDirectory().getPath();
+//                }
 
                 //文件
                 // //separator  分隔符
