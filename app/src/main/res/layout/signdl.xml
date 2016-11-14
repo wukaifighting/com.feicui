@@ -66,6 +66,10 @@
             android:layout_height="wrap_content"
             android:text="0" />
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登录日志"/>
 
     <ListView
         android:id="@+id/lst_sign"

@@ -4,14 +4,6 @@
         "source": "E:\\androidworkspace\\com.feicui\\xListView\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_launcher.png"
     },
     {
-        "merged": "E:\\com.feicui\\xListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\xlistview_arrow.png",
-        "source": "E:\\com.feicui\\xListView\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\xlistview_arrow.png"
-    },
-    {
-        "merged": "E:\\com.feicui\\xListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ic_launcher.png",
-        "source": "E:\\com.feicui\\xListView\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_launcher.png"
-    },
-    {
         "merged": "E:\\androidworkspace\\com.feicui\\xListView\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\xlistview_arrow.png",
         "source": "E:\\androidworkspace\\com.feicui\\xListView\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\xlistview_arrow.png"
     }

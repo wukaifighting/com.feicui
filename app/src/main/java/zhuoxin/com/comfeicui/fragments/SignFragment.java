@@ -13,9 +13,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import java.io.File;
@@ -26,7 +28,7 @@ import zhuoxin.com.comfeicui.R;
  * Created by Administrator on 2016/11/4.
  */
 
-public class SignFragment extends Fragment implements View.OnClickListener {
+public class SignFragment extends Fragment implements View.OnClickListener ,AdapterView.OnItemClickListener{
     Button mBtn_sign;
     ImageView mImg_sign;
     ImageView mImg_camera;
@@ -34,7 +36,7 @@ public class SignFragment extends Fragment implements View.OnClickListener {
     PopupWindow popupWindow;
     File file;
     String path;
-
+     ListView mLst_sign;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,8 +49,10 @@ public class SignFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         mBtn_sign = (Button) view.findViewById(R.id.btn_sign);
         mImg_sign = (ImageView) view.findViewById(R.id.img_signdl);
+        mLst_sign= (ListView) view.findViewById(R.id.lst_sign);
         mBtn_sign.setOnClickListener(this);
         mImg_sign.setOnClickListener(this);
+        mLst_sign.setOnItemClickListener(this);
         popupWindow = new PopupWindow();
         View inflate = getActivity().getLayoutInflater().inflate(R.layout.signpopupwindow, null, false);
         popupWindow.setContentView(inflate);
@@ -182,7 +186,7 @@ public class SignFragment extends Fragment implements View.OnClickListener {
                 //调用系统相机
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 //z照相,需要提供路径用于保存照
-//                if (Environment.getExternalStorageDirectory().getPath().equals(Environment.MEDIA_MOUNTED)) {
+//                if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                  String   path = Environment.getExternalStorageDirectory().getPath();
 //                }
 
@@ -208,5 +212,10 @@ public class SignFragment extends Fragment implements View.OnClickListener {
                 break;
             }
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

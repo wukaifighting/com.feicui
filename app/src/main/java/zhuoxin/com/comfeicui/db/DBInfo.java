@@ -6,7 +6,7 @@ package zhuoxin.com.comfeicui.db;
 
 public class DBInfo  {
     //数据库名字
-    public static final String  DB_NAME="test";
+    public static final String  DB_NAME="name";
     //数据库版本号
     public  static int DB_VERSION=1;
     //数据库中的表名

@@ -31,23 +31,24 @@ import zhuoxin.com.comfeicui.interfacea.Centerinterface;
  * Created by Administrator on 2016/11/1.
  */
 
-public class CenterFragment extends Fragment implements Centerinterface,XListView.IXListViewListener,AdapterView.OnItemClickListener {
+public class CenterFragment extends Fragment implements Centerinterface, XListView.IXListViewListener, AdapterView.OnItemClickListener {
     XListView mXlistview;
     public static final String PATH = "http://118.244.212.82:9092/newsClient/news_list?ver=1&subid=1&dir=1&nid=1&stamp=20140321&cnt=20";
-    ArrayList<Centerchild> list=new ArrayList<>();
+    static ArrayList<Centerchild> list = new ArrayList<>();
     Context context;
     Handler handle;
     int mPosition;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.center_main,container,false);
+        return inflater.inflate(R.layout.center_main, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mXlistview= (XListView) view.findViewById(R.id.xlst);
+        mXlistview = (XListView) view.findViewById(R.id.xlst);
         //监听事件，不监听没反应
         mXlistview.setXListViewListener(this);
         initData();
@@ -67,61 +68,63 @@ public class CenterFragment extends Fragment implements Centerinterface,XListVie
             public void run() {
                 stop();
             }
-        },2000);
+        }, 2000);
     }
+
     //停止加载和刷新
-    public void stop(){
+    public void stop() {
         mXlistview.stopLoadMore();
         mXlistview.stopRefresh();
         //设置时间‘
 
-        SimpleDateFormat format=new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
         mXlistview.setRefreshTime(format.format(System.currentTimeMillis()));
     }
+
     @Override
     public void onLoadMore() {
+
         handle.postDelayed(new Runnable() {
             @Override
             public void run() {
                 stop();
             }
-        },2000);
-//        mPosition++;
-//        new FileAsynctask ().execute(Contacts.PATH_XIAOZU_LV+mPosition);
+        }, 2000);
+
     }
 
     @Override
     public void centerface(String string) {
-     Gson gson=new Gson();
-        Type type=new TypeToken<Centerperson>(){}.getType();
-        Centerperson person=gson.fromJson(string,type);
-        ArrayList<Centerchild>   list= (ArrayList<Centerchild>) person.getData();
-        for (int i = 0; i < 10; i++) {
-            this.list=list;
-        }
-        CenterAdapter centeradapter=new CenterAdapter(list,getContext());
+        Gson gson = new Gson();
+        Type type = new TypeToken<Centerperson>() {
+        }.getType();
+        Centerperson person = gson.fromJson(string, type);
+        list = (ArrayList<Centerchild>) person.getData();
+        CenterAdapter centeradapter = new CenterAdapter(list, getContext());
         mXlistview.setAdapter(centeradapter);
         //监听
-       mXlistview.setOnItemClickListener(this);
+        mXlistview.setOnItemClickListener(this);
         centeradapter.notifyDataSetChanged();
-        handle =new Handler();
+        handle = new Handler();
         //上拉加载，下拉刷新
         mXlistview.setPullLoadEnable(true);
         mXlistview.setPullRefreshEnable(true);
 
 
-
-
-
-}
+    }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent= new Intent(getActivity(), CenterActivity.class);
-        intent.putExtra("position",position);
+        Intent intent = new Intent(getActivity(), CenterActivity.class);
+        intent.putExtra("position",position-1);
         startActivity(intent);
     }
+
+    public static ArrayList<Centerchild> getlist() {
+        return list;
+    }
 }
+
 
 

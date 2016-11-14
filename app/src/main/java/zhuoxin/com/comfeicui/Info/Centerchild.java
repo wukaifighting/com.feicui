@@ -9,14 +9,14 @@ public class Centerchild {
     String icon;
     String stamp;
     String title;
-    int nid;
+    String nid;
     String link;
-    int  type;
+    String type;
 
     public Centerchild() {
     }
 
-    public Centerchild(String summary, String icon, String stamp, String title, int nid, String link, int type) {
+    public Centerchild(String summary, String icon, String stamp, String title, String nid, String link, String type) {
         this.summary = summary;
         this.icon = icon;
         this.stamp = stamp;
@@ -58,11 +58,11 @@ public class Centerchild {
         this.title = title;
     }
 
-    public int getNid() {
+    public String getNid() {
         return nid;
     }
 
-    public void setNid(int nid) {
+    public void setNid(String nid) {
         this.nid = nid;
     }
 
@@ -74,11 +74,11 @@ public class Centerchild {
         this.link = link;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 

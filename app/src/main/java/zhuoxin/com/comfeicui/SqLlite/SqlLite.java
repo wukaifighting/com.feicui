@@ -17,20 +17,24 @@ public class SqlLite extends SQLiteOpenHelper {
     //SQLiteDatabase.CursorFactory factory  游标工厂 null则使用磨人的游标
     //int version  数据库版本
     public SqlLite(Context context) {
-        super(context, DBInfo.DB_NAME,null,DBInfo.DB_VERSION);
+        super(context, DBInfo.DB_NAME, null, DBInfo.DB_VERSION);
     }
 
     //重写构造方法
     //创建数据库
     @Override
     public void onCreate(SQLiteDatabase db) {
-//创建表
-        String sql="create table test(summary Text,icon Text,stamp Text,title Text,nid Integer,link Text,type Integer)";
-       //执行SQL语句，创建一张表
-        db.execSQL(sql);
+        //创建表
+        String sql = "create table %1$s(%2$s text,%3$s text,%4$s text,%5$s integer,%6$s text,%7$s text,%8$s integer)";
+        String fomart = String.format(sql, DBInfo.TABLE_NAME, DBInfo.summary, DBInfo.icon, DBInfo.stamp, DBInfo.title, DBInfo.nid, DBInfo.link, DBInfo.type);
+        db.execSQL(fomart);
+// String sql="create table data(summary Text,icon Text,stamp Text,title Text,nid Integer,link Text,type Integer)";
+        //执行SQL语句，创建一张表
+//        db.execSQL(sql);
 
     }
-//版本更新
+
+    //版本更新
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

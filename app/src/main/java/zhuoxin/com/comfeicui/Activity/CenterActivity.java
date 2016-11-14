@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -15,65 +16,51 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import zhuoxin.com.comfeicui.Info.Centerchild;
-import zhuoxin.com.comfeicui.Info.Centerperson;
 import zhuoxin.com.comfeicui.R;
-import zhuoxin.com.comfeicui.Util.Centilutil;
-import zhuoxin.com.comfeicui.interfacea.Centerinterface;
+import zhuoxin.com.comfeicui.SqLlite.SqlUtil;
+import zhuoxin.com.comfeicui.fragments.CenterFragment;
 
 /**
  * Created by Administrator on 2016/11/1.
  */
 
-public class CenterActivity extends AppCompatActivity implements Centerinterface ,View.OnClickListener{
-    ArrayList<Centerchild> list;
+public class CenterActivity extends AppCompatActivity implements View.OnClickListener{
+    ArrayList<Centerchild> list=new ArrayList<>();
     WebView mWeb;
     int mposition;
-    public static final String PATH = "http://118.244.212.82:9092/newsClient/news_list?ver=1&subid=1&dir=1&nid=1&stamp=20140321&cnt=20";
+     Button btn_share;
     Button mBtn_left;
     ImageView mImg_right;
     PopupWindow popupWindow;
     Button btn_pup;
+    Button btn_data;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = this.getIntent();
-        mposition = intent.getIntExtra("position", -1);
         setContentView(R.layout.centershow);
-
-        /////////////////
-
-
-
-    }
-
-    @Override
-    public void onContentChanged() {
-        super.onContentChanged();
-        mWeb = (WebView) findViewById(R.id.wbv_center);
         mBtn_left= (Button) findViewById(R.id.btn_centershow_left);
         mImg_right= (ImageView) findViewById(R.id.btn_centershow_right);
-        Centilutil centuil = new Centilutil();
-        centuil.Centilutil(this);
-        centuil.execute(PATH);
         mBtn_left.setOnClickListener(this);
         mImg_right.setOnClickListener(this);
-
-
+        btn_data= (Button) findViewById(R.id.btn_data);
+        btn_data.setOnClickListener(this);
+        /////////////////
         //下拉菜单设置
-         popupWindow=new PopupWindow();
-         //设置VIEW
-     View inflate=  this.getLayoutInflater().inflate(R.layout.popupwindow,null,false);
+        popupWindow=new PopupWindow();
+        //设置VIEW
+        View inflate=  this.getLayoutInflater().inflate(R.layout.popupwindow,null,false);
 
         popupWindow.setContentView(inflate);
 
-          btn_pup = (Button) inflate.findViewById(R.id.btn_pupwindow);
+        btn_pup = (Button) inflate.findViewById(R.id.btn_pupwindow);
+        btn_share= (Button) inflate.findViewById(R.id.btn_share);
+        btn_pup.setOnClickListener(this);
+        btn_share.setOnClickListener(this);
         //设置焦点
         popupWindow.setFocusable(true);
         //设置点击取消
@@ -84,30 +71,21 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
         //设置宽高
         popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
         popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-        //显示
 
 
     }
 
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode== KeyEvent.KEYCODE_BACK) {
-//            mWeb.goBack();
-//            return true;
-//        }
-//        return super.onKeyDown(keyCode, event);
-//    }
-
-
     @Override
-    public void centerface(String string) {
-        Gson gson = new Gson();
-        Type type = new TypeToken<Centerperson>() {
-        }.getType();
-        Centerperson person = gson.fromJson(string, type);
-        ArrayList<Centerchild> list = (ArrayList<Centerchild>) person.getData();
+    public void onContentChanged() {
+        super.onContentChanged();
+
+
+        mWeb = (WebView) findViewById(R.id.wbv_center);
+        Intent intent = this.getIntent();
+        mposition = intent.getIntExtra("position",-1);
+        list=CenterFragment.getlist();
         //加载网页
-        mWeb.loadUrl(list.get(mposition - 1).getLink());
+        mWeb.loadUrl(list.get(mposition).getLink());
         //设置客户端的显示样式
         WebSettings mWebSettings = mWeb.getSettings();
         //js代码 自动识别是网页端手机端
@@ -135,23 +113,77 @@ public class CenterActivity extends AppCompatActivity implements Centerinterface
                                   }
                               }
         );
+
     }
+
+
+
+
 
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.btn_centershow_left:
+//
+//                Intent intent=new Intent(this, CenterFragment.class);
+////                intent.putExtra("position",-1);
+//                startActivity(intent);
+                Intent intent=new Intent();
+                Bundle  bundle=new Bundle();
+                bundle.putInt("position",mposition);
+                intent.putExtra("bundle",bundle);
+                CenterActivity.this.setResult(-1,intent);
+                finish();
 
+                break;
 
             case R.id.btn_centershow_right:
 
                popupWindow.showAsDropDown(v);
                 break;
             case R.id.btn_pupwindow:
-
-                Toast.makeText(this,"收藏成功，请在主页面查看",Toast.LENGTH_LONG).show();
+                 SqlUtil squlituil=new SqlUtil(this);
+                Log.e("====","集合+++"+list);
+                String summary=list.get(mposition).getSummary();
+                String  icon =list.get(mposition).getIcon();
+                String stamp=list.get(mposition).getStamp();
+                String title=list.get(mposition).getTitle();
+                String  nid=list.get(mposition).getNid();
+                String link=list.get(mposition).getLink();
+                String type=list.get(mposition).getType();
+                for (int i=0;i<squlituil.query().size();i++){
+                    if (nid.equals(squlituil.query().get(i).getNid())) {
+                        Toast.makeText(this,"请勿重复收藏",Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+                squlituil.insert(summary,icon,stamp,title,nid,link,type);
+                Toast.makeText(this,"收藏成功，请在收藏页面查看",Toast.LENGTH_LONG).show();
                 break;
+            case R.id.btn_share:
+                //初始化sdk
+                ShareSDK.initSDK(this);
+                //实例化对象
+                OnekeyShare onekeyShare = new OnekeyShare();
+                //关闭sso授权
+                onekeyShare.disableSSOWhenAuthorize();
+                onekeyShare.setText(list.get(mposition).getTitle());
+                onekeyShare.setTitle(list.get(mposition).getSummary());
+                onekeyShare.setTitleUrl(list.get(mposition).getLink());
+                //开启分享
+                onekeyShare.show(this);
+
+                break;
+            case R.id.btn_data:
+//                ClickDateFragment clickDateFragment=new ClickDateFragment();
+//                FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.center,clickDateFragment);
+//                fragmentTransaction.commit();
+
+//                Intent intent1=new Intent(CenterActivity.class, ClickDateFragment);
+
         }
     }
 }

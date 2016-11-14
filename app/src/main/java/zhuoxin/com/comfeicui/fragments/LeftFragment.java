@@ -1,5 +1,6 @@
 package zhuoxin.com.comfeicui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import zhuoxin.com.comfeicui.Activity.LocalPhotoActivity;
 import zhuoxin.com.comfeicui.Activity.MainActivity;
 import zhuoxin.com.comfeicui.R;
 
@@ -24,13 +26,13 @@ public class LeftFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.left, container, false);
+
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mlst = (ListView) view.findViewById(R.id.lst_left);
-
         mlst.setOnItemClickListener(this);
 
 
@@ -52,6 +54,12 @@ public class LeftFragment extends Fragment implements AdapterView.OnItemClickLis
                 collect.replace(R.id.center, collectFragment);
                 collect.commit();
                 MainActivity.close();
+            case 2:
+                Intent intent=new Intent(getActivity(), LocalPhotoActivity.class);
+                 startActivity(intent);
+
+
+
         }
     }
 }
